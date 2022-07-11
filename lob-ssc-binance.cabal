@@ -64,6 +64,7 @@ common common-all
       ,lens
       ,mtl
       ,time
+      ,easyplot
       --,MyLib
       --,Utils
       --,SSC

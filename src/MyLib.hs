@@ -5,10 +5,6 @@ module MyLib where
 
 import Control.Monad ()
 
-import Control.Monad.Writer ()  
-import Control.Monad.Reader ()
-import Control.Monad.State ()
-
 import Control.Concurrent ()
 import Control.Lens ( (^.) )
 import Data.Monoid ()
@@ -23,8 +19,8 @@ import GHC.Generics ( Generic )
 import Data.Function (on)
 import Data.List (minimumBy, maximumBy, sortBy)
 import Data.Ord (comparing)
-import Utils ( ordersToDouble, minFst, maxFst, accQtd ) 
-import SSC () 
+import Utils ( ordersToDouble, minFst, maxFst, accQtd )
+import SSC (linearRegression)
 
 -- Types for defining the API.
 --------------------------------------------------------------------------------
@@ -37,9 +33,9 @@ instance Show Depth where
 type URL = String
 
 constructUrl :: Ticker -> Depth -> URL
-constructUrl t d = baseurl ++ 
-  "limit=" ++ show(depth d) ++ "&" ++ 
-  "symbol=" ++ ticker t where 
+constructUrl t d = baseurl ++
+  "limit=" ++ show(depth d) ++ "&" ++
+  "symbol=" ++ ticker t where
     baseurl = "https://api.binance.com/api/v3/depth?"
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -55,8 +51,8 @@ data RspOrderBook = RspOrderBook {
 
 instance FromJSON RspOrderBook
 
-getOrderBook :: IO (RspOrderBook)
-getOrderBook = do 
+getOrderBook :: IO RspOrderBook
+getOrderBook = do
   r <- asJSON =<< Network.Wreq.get (constructUrl (Ticker "ADAUSDT") (Depth 10))
   pure (r ^. Network.Wreq.responseBody)
 --------------------------------------------------------------------------------
@@ -71,6 +67,8 @@ data DataOB = DataOB {
   xBids :: [(Double, Double)],
   cummAsks :: [(Double, Double)],
   cummBids :: [(Double, Double)],
+  dataOLS :: [(Double, Double)],
+  regOLS :: (Double, Double),
   pAsk :: Double,
   pBid :: Double,
   qAsk :: Double,
@@ -81,11 +79,13 @@ data DataOB = DataOB {
 } deriving (Show, Generic)
 
 buildOBData :: RspOrderBook -> DataOB
-buildOBData rOB = let  
+buildOBData rOB = let
   xbs = sortBy (flip compare `on` fst) $ Utils.ordersToDouble (MyLib.bids rOB)
   xas = sortBy (compare `on` fst) $ Utils.ordersToDouble (MyLib.asks rOB)
   cumbs = Utils.accQtd xbs
   cumas = Utils.accQtd xas
+  dataols = sortBy (compare `on` fst) $ map (\x -> (fst x, (-1) * snd x)) cumbs ++ cumas
+  regols = linearRegression (map snd dataols) (map (log . fst) dataols)
   pask = fst $ Utils.minFst xas
   qask = snd $ Utils.minFst xas
   pbid = fst $ Utils.maxFst xbs
@@ -98,6 +98,8 @@ buildOBData rOB = let
     xAsks = xas,
     cummBids = cumbs,
     cummAsks = cumas,
+    dataOLS = dataols,
+    regOLS = regols,
     pBid = pbid,
     pAsk = pask,
     qBid = qbid,

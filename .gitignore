@@ -23,5 +23,5 @@ cabal.project.local~
 .ghc.environment.*
 
 tmp/
-#repl.hs
+repl.hs
 
