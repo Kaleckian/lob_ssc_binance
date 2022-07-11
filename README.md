@@ -109,7 +109,7 @@ The weigheted mid-price:
   * High frequency signal;
   * Is quite noise, particularly when the spread widens to two ticks.
 
-## Main Goal: Reproduce Hossaka (2018)
+## Main Goal: Reproduce Hossaka (2018) in Haskell
   Reproduce ideas from Hossaka (2018) in Haskell, specially based on the following plots with live feed data!
   
   ![HFD_SSC_rise_log_midprice_MULT3_20170320](img/alpha_S0_loglevel.jpeg)

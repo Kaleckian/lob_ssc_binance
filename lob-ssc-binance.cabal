@@ -56,22 +56,25 @@ common common-all
     -- Base language which the package is written in.
     default-language: Haskell2010
     build-depends:    
-      base,
-      wreq,
-      text,
-      aeson,
-      bytestring,
-      lens,
-      servant,
-      mtl,
-      time
+      base
+      ,wreq
+      ,text
+      ,aeson
+      ,bytestring
+      ,lens
+      ,mtl
+      ,time
+      --,MyLib
+      --,Utils
+      --,SSC
+
 library
     import: common-all
     -- Modules exported by the library.
-    exposed-modules:  MyLib
+    exposed-modules:  MyLib, Utils, SSC
 
     -- Modules included in this library but not exported.
-    other-modules: Utils, SSC
+    --other-modules: 
     --, ApiServer, Middleware
 
     -- LANGUAGE extensions used by modules in this package.
@@ -95,19 +98,8 @@ executable lob-ssc-binance
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
---   build-depends:
-        -- base,
-        -- wreq,
-        -- text,
-        -- aeson,
-        -- lens,
-        -- servant,
---        Chart ^>= 1.9.4,
---        lens ^>= 5.1.1,
---        data-default-class ^>= 0.1.2.0,
---        colour ^>= 2.3.6,
---        time ^>= 1.11.1.1,
---        lob-ssc-binance
+    build-depends:
+      lob-ssc-binance
 
     -- Directories containing source files.
     hs-source-dirs:   app

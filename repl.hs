@@ -56,6 +56,7 @@ main = forever $ do
   print $ wgmidP $ df_ob
   putStrLn "Press \'CTRL + C \' to stop."
 
+type ListDataOB = [DataOB]
 data DataOB = DataOB {
   _time :: Double,
   _idUpdate :: Int,
@@ -72,9 +73,8 @@ data DataOB = DataOB {
   wgmidP :: Double
 } deriving (Show, Generic)
 
-type ListDataOB = [DataOB]
 
---sortBy (comparing $ length . snd)
+
 buildOBData :: RspOrderBook -> DataOB
 buildOBData rOB = let  
   xbs = sortBy (flip compare `on` fst) $ Utils.ordersToDouble (Main.bids rOB)
@@ -102,6 +102,10 @@ buildOBData rOB = let
     wgmidP = pbid * (1 - imb) + pask * imb
   }
 
+getOrderBook :: IO (RspOrderBook)
+getOrderBook = do 
+  r <- asJSON =<< Network.Wreq.get (constructUrl (Ticker "ADAUSDT") (Depth 10))
+  pure (r ^. Network.Wreq.responseBody)
 
 data RspOrderBook = RspOrderBook {
   --respHeaders :: [(String, String)],
@@ -112,10 +116,7 @@ data RspOrderBook = RspOrderBook {
 
 instance FromJSON RspOrderBook
 
-getOrderBook :: IO (RspOrderBook)
-getOrderBook = do 
-  r <- asJSON =<< Network.Wreq.get (constructUrl (Ticker "ADAUSDT") (Depth 10))
-  pure (r ^. Network.Wreq.responseBody)
+
 
 -- >>= bind
 --(>>=) :: Monad m => m a -> (a -> m b) -> m b
