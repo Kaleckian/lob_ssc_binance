@@ -49,7 +49,7 @@ main = forever $ do
   print $ (exp . snd) (MyLib.regOLS df_ob)
   putStrLn "Bid-Ask Spread in ticks:"
   print $ (MyLib.pBid df_ob - MyLib.pAsk df_ob ) / 0.0001
-  plot X11 $ zip (map snd $ MyLib.dataOLS df_ob) (map fst $ MyLib.dataOLS df_ob)
+--  plot X11 $ zip (map snd $ MyLib.dataOLS df_ob) (map fst $ MyLib.dataOLS df_ob)
   putStrLn "Press \'CTRL + C \' to stop."
 
 -- selectTicker :: IO Char -> IO Char -> IO URL
