@@ -16,17 +16,18 @@ linearRegression xs ys = (gradient, intercept)
     gradient = covariance xs ys / variance xs
     intercept = average ys - gradient * average xs
 
+x = [1.0..10.0]
+y = [0.3906373, 0.6805038, 2.4701434, 4.1830330, 2.6120854, 5.0938693, 4.5021476, 6.1902221, 7.2997985, 7.4370719]
 
--- calculateRSqr :: (Double, Double) -> [Double] -> [Double] -> a
--- calculateRSqr _ [] [] = 0
--- calculateRSqr (b, a) x y = 1 - (ssr)/(sst) where
---   yhat = map (\xi -> a + b * xi) x
---   yavg = average y
---   numy = zipWith (-) y yhat 
---   deny = map . (\yi -> y - yavg) y
---   ssr = foldr1 (+) $ map (^2) numy
---   sst = foldr1 (+) $ map (^2) deny  
-
+calculateRSqr :: (Double, Double) -> [Double] -> [Double] -> Double
+calculateRSqr _ [] [] = 0
+calculateRSqr (b, a) x y = 1 - (ssr)/(sst) where
+  yhat = map (\xi -> a + b * xi) x
+  yavg = average y
+  numy = zipWith (-) y yhat 
+  deny = map (\yi -> yi - yavg) y
+  ssr = foldr1 (+) $ map (^2) numy
+  sst = foldr1 (+) $ map (^2) deny  
 
 -- movingWindow :: [Double] -> Int -> [Double]
 -- movingWindow xs windowSize

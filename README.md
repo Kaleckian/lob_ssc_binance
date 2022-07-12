@@ -13,15 +13,17 @@
   * [X] Implementation of records and data types;
   * [X] Treating data and getting indicators;
   * [X] Simple SSC regression;
+    * [X] Conference of results;
+    * [X] R<sup>2</sup>.
   * [X] Organising files (app.Main, app.Utils, app.SSC): the damn thing is running with ```cabal repl```, ```:l repl.hs``` and by calling the ```main``` function explicitly (```cabal run``` not working);
   * [ ] Static plots on Haskell (no cheating with R or Python);
     * [ ] ???;
     * [ ] ???;
     * [ ] ???;
     * [ ] ???.
-  * [ ] Live updates of plots;
+  * [ ] Live updates of plots (Considering cheating with R or Python...);
     * [ ] Needs some more complex IOs to continuosly evaluate past and current computation;
-  * Definitely improving the types...
+  * [ ] Definitely improving the types on the future...
   * [ ] Implement Stoikov (2018)!!!
 ## SSC on Order Book Data
 
