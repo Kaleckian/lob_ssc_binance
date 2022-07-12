@@ -38,7 +38,7 @@
   ![LOB_MULT3](img/Example_LOB1_Chap4.jpeg)
 
 
-  Let $(P_{i}, \sum_{i=1}^{k})$ be the k-th level of depth at price $P_{i}$ from the bid side of a LOB. Each level of depth on the bid side is provides liquidity for a given buying order of size $v_{B}$ and, on the converse, a $(-P_{j},\sum_{j=1}^{m})$ is a point providing liquidity for a selling order. 
+  Let $(P_{i}, \sum^{k})$ be the k-th level of depth at price $P_{i}$ from the bid side of a LOB. Each level of depth on the bid side is provides liquidity for a given buying order of size $v_{B}$ and, on the converse, a $(-P_{j},\sum^{m})$ is a point providing liquidity for a selling order. 
 
   Since the volume is monotone over the depth of each side of the LOB, the Stochastic Supply Curve is expected to have an upward slope such as follows:
 
