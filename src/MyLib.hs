@@ -8,7 +8,7 @@ import Control.Monad ()
 import Control.Concurrent ()
 import Control.Lens ( (^.) )
 import Data.Monoid ()
-import Data.Time.Clock (getCurrentTime)
+--import Data.Time.Clock (getCurrentTime)
 import Data.Maybe ()
 
 import Network.Wreq ( asJSON, get, responseBody )
@@ -53,7 +53,7 @@ instance FromJSON RspOrderBook
 
 getOrderBook :: IO RspOrderBook
 getOrderBook = do
-  r <- asJSON =<< Network.Wreq.get (constructUrl (Ticker "ADAUSDT") (Depth 10))
+  r <- asJSON =<< Network.Wreq.get (constructUrl (Ticker "ADAUSDT") (Depth 30))
   pure (r ^. Network.Wreq.responseBody)
 --------------------------------------------------------------------------------
 

@@ -2,19 +2,17 @@
 
 module Main where
 
+--import Graphics.EasyPlot
+--import Graphics.Plotly
+
 import System.IO
-import Control.Monad
+import Control.Monad ( forever )
 
 --import Data.Time.Clock (getCurrentTime)
 
 import Data.Function (on)
 import Data.List (minimumBy, maximumBy, sortBy)
 import Data.Ord (comparing)
-
-import Graphics.EasyPlot (
-  Graph2D( Data2D, Function2D ),
-  Color, Option(Title), TerminalType( X11 ), plot
-  )
 
 import MyLib
     ( DataOB(_idUpdate, pAsk, pBid, midP, wgmidP, cummAsks, cummBids, dataOLS, regOLS),
@@ -26,29 +24,32 @@ import MyLib
       getOrderBook,
       buildOBData )
 import Utils ( ordersToDouble )
---import qualified SSC
+import SSC
+--import Plotlyhs (vbarData)
+
 
 main :: IO ()
 --main = do
 main = forever $ do 
---main = do
   ob <- MyLib.getOrderBook 
   let df_ob = MyLib.buildOBData ob 
+  --print $ MyLib.dataOLS df_ob 
   {-
-  print $ MyLib.dataOLS df_ob 
   print $ MyLib.cummAsks df_ob
   print $ MyLib.cummBids df_ob
   -}
 
   putStrLn "lastUpdateId:"
   print $ show (MyLib._idUpdate df_ob)
-  putStrLn "The mid-price:"
+  putStrLn "Mid-price:"
   print $ MyLib.midP df_ob
-  putStrLn "The weighted mid-price:"
+  putStrLn "Weighted mid-price:"
   print $ MyLib.wgmidP df_ob
-  putStrLn "CJP martingale is:"
+  putStrLn "CJP martingale:"
   print $ (exp . snd) (MyLib.regOLS df_ob)
-  plot X11 $ zip (map snd $ MyLib.dataOLS df_ob) (map fst $ MyLib.dataOLS df_ob)
+  putStrLn "Bid-Ask Spread in ticks:"
+  print $ (MyLib.pBid df_ob - MyLib.pAsk df_ob ) /0.00001
+  --plot X11 $ zip (map snd $ MyLib.dataOLS df_ob) (map fst $ MyLib.dataOLS df_ob)
   putStrLn "Press \'CTRL + C \' to stop."
 
 -- selectTicker :: IO Char -> IO Char -> IO URL
