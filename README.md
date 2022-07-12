@@ -21,6 +21,7 @@
     * [ ] ???.
   * [ ] Live updates of plots;
     * [ ] Needs some more complex IOs to continuosly evaluate past and current computation;
+  * Definitely improving the types...
   * [ ] Implement Stoikov (2018)!!!
 ## SSC on Order Book Data
 
@@ -28,15 +29,14 @@
 
   Even though it is a static picture, a snapshot of market conditions at a fixed time, it is far from being stationary and well-behaved: complicated global phenomena emerge as result of interactions between heterogeneous agents (Gould et. ali, 2013).
 
-  Market conditions are path-dependent and building a LOB through time relies heavily on data consistency and studying its conditional behavior is complex. As explained by Gould et ali (2013) this is so because its state space is huge: if there are P different choices for a price in a given LOB, then the state space of the current depth (volume/quantity for a bid/ask price) profile alone expressed in a lot size $\nu$ is $\mathbb{Z}^{p}$.
+  Market conditions are path-dependent and building a LOB through time relies heavily on data consistency and studying its conditional behavior is complex. As explained by Gould et ali (2013) this is so because its state space is huge: if there are P different choices for a price in a given LOB, then the state space of the current depth (volume/quantity for a bid/ask price) profile alone expressed in a lot size $\nu$ is $\mathbb{Z}^{p} $.
 
   A LOB organizes prices and quantities for an order-driven market and, as one the main points in this work, when there is Market Liquidity Risk it may change and change deeply, rapidly and drastically in such a way that it would greatly differ from the its previous states in time. 
 
   ![LOB_MULT3](img/Example_LOB1_Chap4.jpeg)
 
-  Let $(P_{i},\sum_{i=1}^{k})$ be the k-th level of depth at price $P_{i}$ from the bid side of a LOB. Each level of depth on the bid side is provides liquidity for a given buying order of size $v_{B}$ and, on the converse, a $(-P_{j},\sum_{j=1}^{m})$ is a point providing liquidity for a selling order. 
 
-  
+  Let $(P_{i}, \sum_{i=1}^{k})$ be the k-th level of depth at price $P_{i}$ from the bid side of a LOB. Each level of depth on the bid side is provides liquidity for a given buying order of size $v_{B}$ and, on the converse, a $(-P_{j},\sum_{j=1}^{m})$ is a point providing liquidity for a selling order. 
 
   Since the volume is monotone over the depth of each side of the LOB, the Stochastic Supply Curve is expected to have an upward slope such as follows:
 
@@ -46,7 +46,7 @@
 
 $$
 \begin{aligned}
-S(t,\Delta X_{i}) &= S(t,0)\exp(\alpha_{t} \Delta X_{i} + \epsilon_{i}) \Rightarrow \nonumber \\
+S(t,\Delta X_{i}) &= S(t,0) \exp(\alpha_{t} \Delta X_{i} + \epsilon_{i}) \Rightarrow\\
 \log(S(t,\Delta X_{i})) &= \log(S(t,0)) + \alpha_{t} \Delta X_{i} + \epsilon_{i}.
 \end{aligned}
 $$
@@ -57,8 +57,8 @@ $$
 
 $$
 \begin{aligned}
-\frac{\partial}{\partial \Delta X}S(t,\Delta X_{i}) &= \frac{\partial}{\partial \Delta X}S(t, \Delta X)\exp(\alpha_{t} \Delta X_{i} + \epsilon_{i}) \nonumber \\
-&= \alpha_{t}\overset{S(t,\Delta X_{i})}{\overbrace{S(t,\Delta X)\exp(\alpha_{t} \Delta X)}}\nonumber \\
+\frac{\partial}{\partial \Delta X}S(t,\Delta X_{i}) &= \frac{\partial}{\partial \Delta X}S(t, \Delta X)\exp(\alpha_{t} \Delta X_{i} + \epsilon_{i}) \\
+&= \alpha_{t}\overset{S(t,\Delta X_{i})}{\overbrace{S(t,\Delta X)\exp(\alpha_{t} \Delta X)}}\\
 \alpha_{t}&= \frac{\partial}{\Delta X}S(t,\Delta X_{i})\frac{1}{S(t,\Delta X_{i})}.
 \end{aligned}
 $$
