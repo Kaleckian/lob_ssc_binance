@@ -67,6 +67,7 @@ $$
 
   This means that a change in one $\Delta X$ unit, for instance, shares in lot units, will delivers $\alpha_{t}$\% change in $S(t,\Delta X_{i})$.
 ## Other Definitions on Market Microstructure - Notes from Stoikov (2017)
+
 $$
 \begin{aligned}
 P^{a} &:= \text{Ask price is the lowest selling price} \\
@@ -77,6 +78,7 @@ Q^{b} &:= \text{Bid size is the total volume at } P^{b}
 $$
 
 Mid-price:
+
 $$
 \begin{aligned}
 M &= \frac{P^{a} + P^{b}}{2}
@@ -84,6 +86,7 @@ M &= \frac{P^{a} + P^{b}}{2}
 $$
 
 Imbalance:
+
 $$
 \begin{aligned}
 I &= \frac{Q^{b}}{Q^{a} + Q^{b}}
@@ -91,6 +94,7 @@ I &= \frac{Q^{b}}{Q^{a} + Q^{b}}
 $$
 
 Weighted mid-price:
+
 $$
 \begin{aligned}
 \bar{M} &= P^{b} ( 1 - I) + P^{a} I
@@ -98,6 +102,7 @@ $$
 $$
 
 Bid-ask spread:
+
 $$
 \begin{aligned}
 S = (P^{a} - P^{b})
