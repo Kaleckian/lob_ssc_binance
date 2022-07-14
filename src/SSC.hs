@@ -16,9 +16,6 @@ linearRegression xs ys = (gradient, intercept)
     gradient = covariance xs ys / variance xs
     intercept = average ys - gradient * average xs
 
-x = [1.0..10.0]
-y = [0.3906373, 0.6805038, 2.4701434, 4.1830330, 2.6120854, 5.0938693, 4.5021476, 6.1902221, 7.2997985, 7.4370719]
-
 calculateRSqr :: (Double, Double) -> [Double] -> [Double] -> Double
 calculateRSqr _ [] [] = 0
 calculateRSqr (b, a) x y = 1 - (ssr)/(sst) where

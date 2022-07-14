@@ -37,6 +37,16 @@ constructUrl t d = baseurl ++
   "limit=" ++ show(depth d) ++ "&" ++
   "symbol=" ++ ticker t where
     baseurl = "https://api.binance.com/api/v3/depth?"
+
+{-getLineTickerDepth :: IO String -> IO String -> [(Ticker, Depth)]
+getLineTickerDepth = do
+  putStrLn "Tickers:"
+  putStrLn "1 for ADAUSDT"
+  putStrLn "2 for CTSIUSDT"
+  t <- getChar
+  putStrLn "Depth:"
+  d <- getChar (read :: String -> Int)
+-}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -53,7 +63,7 @@ instance FromJSON RspOrderBook
 
 getOrderBook :: IO RspOrderBook
 getOrderBook = do
-  r <- asJSON =<< Network.Wreq.get (constructUrl (Ticker "ADAUSDT") (Depth 20))
+  r <- asJSON =<< Network.Wreq.get (constructUrl (Ticker "CTSIUSDT") (Depth 20))
   pure (r ^. Network.Wreq.responseBody)
 --------------------------------------------------------------------------------
 
@@ -69,6 +79,7 @@ data DataOB = DataOB {
   cummBids :: [(Double, Double)],
   dataOLS :: [(Double, Double)],
   regOLS :: (Double, Double),
+  cjpM :: Double,
   rSqr :: Double,
   pAsk :: Double,
   pBid :: Double,
@@ -83,11 +94,12 @@ buildOBData :: RspOrderBook -> DataOB
 buildOBData rOB = let
   xbs = sortBy (flip compare `on` fst) $ Utils.ordersToDouble (MyLib.bids rOB)
   xas = sortBy (compare `on` fst) $ Utils.ordersToDouble (MyLib.asks rOB)
-  cumbs = Utils.accQtd xbs
-  cumas = Utils.accQtd xas
-  dataols = sortBy (compare `on` fst) $ map (\x -> (fst x, (-1) * snd x)) cumbs ++ cumas
+  cumbs = Utils.accQtd $ map (\x -> (fst x, snd x/(-1000))) xbs
+  cumas = Utils.accQtd $ map (\x -> (fst x, snd x/1000)) xas
+  dataols = sortBy (compare `on` fst) $ map (\x -> (fst x, snd x)) cumbs ++ cumas
   regols = linearRegression (map snd dataols) (map (log . fst) dataols)
   rsqr = calculateRSqr regols (map snd dataols) (map (log . fst) dataols)
+  cjpm = (exp . snd) regols
   pask = fst $ Utils.minFst xas
   qask = snd $ Utils.minFst xas
   pbid = fst $ Utils.maxFst xbs
@@ -102,6 +114,7 @@ buildOBData rOB = let
     cummAsks = cumas,
     dataOLS = dataols,
     regOLS = regols,
+    cjpM = cjpm,
     rSqr = rsqr,
     pBid = pbid,
     pAsk = pask,

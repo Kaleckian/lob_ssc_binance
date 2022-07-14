@@ -57,6 +57,8 @@ common common-all
     default-language: Haskell2010
     build-depends:    
       base
+      ,process
+      ,cassava
       ,wreq
       ,text
       ,aeson
@@ -64,11 +66,7 @@ common common-all
       ,lens
       ,mtl
       ,time
-      ,plotlyhs
-      ,easyplot
-      ,hvega
-      ,microlens
-      ,lucid
+      ,optparse-declarative
       --,lucid
       --,MyLib
       --,Utils
@@ -77,7 +75,7 @@ common common-all
 library
     import: common-all
     -- Modules exported by the library.
-    exposed-modules:  MyLib, Utils, SSC, Plotlyhs
+    exposed-modules:  MyLib, Utils, SSC, CallPy, TestCSV
 
     -- Modules included in this library but not exported.
     --other-modules: 

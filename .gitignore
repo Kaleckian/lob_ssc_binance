@@ -24,4 +24,6 @@ cabal.project.local~
 
 tmp/
 repl.hs
-
+li.hs
+aa.hs
+t.hs

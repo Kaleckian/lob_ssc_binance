@@ -24,3 +24,12 @@ accQtd [] = []
 accQtd xs = zip ps qs where
   ps = map fst xs
   qs = scanl1 (+) (map snd xs)
+
+  
+x :: [Double]
+x = [1.0..10.0]
+y :: [Double]
+y = [0.3906373, 0.6805038, 2.4701434, 4.1830330, 2.6120854, 5.0938693, 4.5021476, 6.1902221, 7.2997985, 7.4370719]
+
+tup :: [(Double, Double)]
+tup = zip x y
