@@ -20,11 +20,18 @@ An implementation of the Stochastic Supply Curve
 * [ ] Live updates of plots (cheating with Python);
   * [X] CSV live feed update (cheating with Python);
   * [X] Real time plots. Kinda of... ```system $ "python pyfile.py"```;
-* [ ] Definitely improving the types on the future...
+* [ ] Definitely improving the types in the future...
+* [ ] Saving CSV with Haskell;
+* [ ] Concurrent non-vanishing thread (```controlProcess``` instead of the simple ```system $```);
+* [ ] Plotting with Haskell seems only feasible under Nix ¬¬;
 * [ ] Implement Stoikov (2018)!!!
 
 ## A note on Python
-Python has to be installed with the libraries in [requirementsPy.yaml](requirementsPy.yaml).
+Python has to be installed with the libraries in [requirementsPy.yaml](requirementsPy.yaml). ```livePlot_AAAA.py``` scripts have to be run separately, one environment for each possible plot.
+
+Both saving 
+
+... to be improved.
 
 ## Stochastic Processes - GBM and Liquidity Costs + Market Impact 
 
