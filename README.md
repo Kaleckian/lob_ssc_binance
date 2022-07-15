@@ -13,13 +13,13 @@ An implementation of the Stochastic Supply Curve
 * [X] Implementation of records and data types;
 * [X] Treating data and getting indicators;
 * [X] Simple SSC regression;
-  * [X] Conference of results;
+  * [X] Checking OLS results;
   * [X] R<sup>2</sup>.
 * [X] Organising files (app.Main, app.Utils, app.SSC): the damn thing is running with ```cabal repl```, ```:l repl.hs``` and by calling the ```main``` function explicitly (```cabal run``` not working);
 * [ ] Static plots on Haskell (no cheating with R or Python);
-* [-] Live updates of plots (cheating with Python);
+* [ ] Live updates of plots (cheating with Python);
   * [X] CSV live feed update (cheating with Python);
-  * [-] Real time plots. Kinda of... ```system $ "python pyfile.py```;
+  * [X] Real time plots. Kinda of... ```system $ "python pyfile.py"```;
 * [ ] Definitely improving the types on the future...
 * [ ] Implement Stoikov (2018)!!!
 
@@ -52,7 +52,7 @@ $$
 \mathbb{E}[X_{T}] = \overset{MtM value}{\overbrace{X_{0}+q_{0}S_{0}}} - \overset{perm. m. i.}{\overbrace{\frac{k}{2}q_{0}^{2}}} - \overset{Liquidity Costs}{\overbrace{\int_{0}^{T}V_{t}L\left(\frac{v_{t}}{V_{t}}\right)dt}}.
 \end{aligned}
 $$
-
+\v
 The first term is the Mark-to-Market value of the portfolio at time $t=0$. The second term corresponds to costs coming from the permanent market impact and, surprisingly, is not dependent on $v_{t}$, thus, being unavoidable. 
 
 The third and final term, the Liquidity Cost, is the only one varying with the control $(v_{t})_{t \in [0,T]}$. The function $L\left(\frac{v_{t}}{V_{t}}\right)$ is assumed to be convex and it is minimal when is proportional do $V_{t}$. 
