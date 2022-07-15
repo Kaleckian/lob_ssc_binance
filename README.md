@@ -20,6 +20,7 @@ An implementation of the Stochastic Supply Curve
 * [ ] Live updates of plots (cheating with Python);
   * [X] CSV live feed update (cheating with Python);
   * [X] Real time plots. Kinda of... ```system $ "python pyfile.py"```;
+  * [ ] Better threads and making ```system $ "python pyfile.py"``` to call for the proper virtual env (or conda env).
 * [ ] Definitely improving the types in the future...
 * [ ] Saving CSV with Haskell;
 * [ ] Concurrent non-vanishing thread (```controlProcess``` instead of the simple ```system $```);
@@ -27,10 +28,9 @@ An implementation of the Stochastic Supply Curve
 * [ ] Implement Stoikov (2018)!!!
 
 ## A note on Python
-Python has to be installed with the libraries in [requirementsPy.yaml](requirementsPy.yaml). ```livePlot_AAAA.py``` scripts have to be run separately, one environment for each possible plot.
+Python has to be installed with the libraries in [requirementsPy.yaml](requirementsPy.yaml). ```livePlot_AAAA.py``` scripts have to be run separately (after or during ```run cabal```), one environment for each possible plot.
 
-Both saving 
-
+Both saving CSV writting and live plotting are base on the scripts on py_files folder...
 ... to be improved.
 
 ## Stochastic Processes - GBM and Liquidity Costs + Market Impact 
@@ -194,6 +194,6 @@ Umut Cetin, Robert Jarrow, Philip Protter, and Mitch Warachka. Pricing options i
 
 Martin D Gould, Mason A Porter, Stacy Williams, Mark McDonald, Daniel J Fenn, and Sam D Howison. Limit order books. Quantitative Finance, 13(11): 1709-1742, 2013.
 
-Guilherme Hideo Assaoka Hossaka. Stochastic Supply Curves and Liquidity Costs: Estimation for Brazilian Equities. MSc dissertation, School of Applied Mathematics (EMAp), Getúlio Vargas Foundation - RJ, 2013.
+Guilherme Hideo Assaoka Hossaka. Stochastic Supply Curves and Liquidity Costs: Estimation for Brazilian Equities. MSc dissertation, School of Applied Mathematics (EMAp), Getúlio Vargas Foundation - RJ, 2016.
 
 Sasha Stoikov. The micro-price: a high-frequency estimator of future prices. Quantitative Finance. Taylor & Francis Journals, vol. 18(12), 1959-1966, 2018.

@@ -58,19 +58,10 @@ common common-all
     build-depends:    
       base
       ,process
-      ,cassava
       ,wreq
       ,text
       ,aeson
-      ,bytestring
       ,lens
-      ,mtl
-      ,time
-      ,optparse-declarative
-      --,lucid
-      --,MyLib
-      --,Utils
-      --,SSC
 
 library
     import: common-all
