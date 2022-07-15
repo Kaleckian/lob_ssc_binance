@@ -46,7 +46,7 @@ dS_{t} = \sigma dW_{t} + kv_{t}dt
 $$
 
 
-Under this economy, the expectation of the cash balance at the end of the execution schedule, $\bb{E}[X_{T}]$, incorporates both permanent market impact and liquidity costs:
+Under this economy, the expectation of the cash balance at the end of the execution schedule, $\mathbb{E}[X_{T}]$, incorporates both permanent market impact and liquidity costs:
 
 $$
 \begin{aligned}
