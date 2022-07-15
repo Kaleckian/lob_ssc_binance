@@ -33,7 +33,6 @@ Classical Geometrical Brownian Motion:
 $$
 \begin{aligned}
 dS_{t} = \mu S_{t}dt + \sigma S_{t}dW_{t}
-\label{GBM}
 \end{aligned}
 $$
 
@@ -51,7 +50,6 @@ Under this economy, the expectation of the cash balance at the end of the execut
 $$
 \begin{aligned}
 \mathbb{E}[X_{T}] = \overset{MtM value}{\overbrace{X_{0}+q_{0}S_{0}}} - \overset{perm. m. i.}{\overbrace{\frac{k}{2}q_{0}^{2}}} - \overset{Liquidity Costs}{\overbrace{\int_{0}^{T}V_{t}L\left(\frac{v_{t}}{V_{t}}\right)dt}}.
-\label{eq:exampleEX}
 \end{aligned}
 $$
 
@@ -62,7 +60,7 @@ The third and final term, the Liquidity Cost, is the only one varying with the c
 ## Extreme Example: Market Liquidity Risk - The Saw-Tooth Pattern
 The "Saw-Tooth Pattern": Lehalle (2012) and Guéant (2016):
 
-![SawTooth](img/SawTooth.png)
+![SawTooth](img/SawTooth.jpeg)
 ## SSC on Order Book Data
 
 The Limit Order Book (LOB from now on) is considered to be the ``ultimate microscopic level of description of financial markets´´ (Bouchaud et. ali, 2002).
