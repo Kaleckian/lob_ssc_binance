@@ -63,7 +63,7 @@ instance FromJSON RspOrderBook
 
 getOrderBook :: IO RspOrderBook
 getOrderBook = do
-  r <- asJSON =<< Network.Wreq.get (constructUrl (Ticker "CTSIUSDT") (Depth 20))
+  r <- asJSON =<< Network.Wreq.get (constructUrl (Ticker "BTCUSDT") (Depth 20))
   pure (r ^. Network.Wreq.responseBody)
 --------------------------------------------------------------------------------
 
@@ -94,8 +94,8 @@ buildOBData :: RspOrderBook -> DataOB
 buildOBData rOB = let
   xbs = sortBy (flip compare `on` fst) $ Utils.ordersToDouble (MyLib.bids rOB)
   xas = sortBy (compare `on` fst) $ Utils.ordersToDouble (MyLib.asks rOB)
-  cumbs = Utils.accQtd $ map (\x -> (fst x, snd x/(-1000))) xbs
-  cumas = Utils.accQtd $ map (\x -> (fst x, snd x/1000)) xas
+  cumbs = Utils.accQtd $ map (\x -> (fst x, snd x/(-1))) xbs
+  cumas = Utils.accQtd $ map (\x -> (fst x, snd x/1)) xas
   dataols = sortBy (compare `on` fst) $ map (\x -> (fst x, snd x)) cumbs ++ cumas
   regols = linearRegression (map snd dataols) (map (log . fst) dataols)
   rsqr = calculateRSqr regols (map snd dataols) (map (log . fst) dataols)

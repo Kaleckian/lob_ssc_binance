@@ -8,7 +8,9 @@ import System.Process (
 
 import GHC.IO.Exception ( ExitCode )
 import qualified GHC.IO.Handle as GHC.IO.Handle.Types
-import MyLib (DataOB (_idUpdate, midP, wgmidP, cjpM, regOLS, dataOLS))
+import MyLib (
+  DataOB (_idUpdate, midP, wgmidP, cjpM, regOLS, pBid, pAsk, dataOLS)
+  )
 --activateEnv = system "py_haskell/Scripts/activate"
 
 --activateEnv = rawSystem $ "venv/Scripts/activate" [] []
@@ -27,7 +29,10 @@ argData df_ob = system $ "python py_files/argData.py" ++ " " ++
   show(MyLib.wgmidP df_ob) ++ " " ++
   show(MyLib.cjpM df_ob) ++ " " ++
   show(fst $ MyLib.regOLS df_ob) ++ " " ++
-  show(MyLib.dataOLS df_ob)
+  show(MyLib.pBid df_ob) ++ " " ++
+  show(MyLib.pAsk df_ob) ++ " " ++
+  show(map snd $ MyLib.dataOLS df_ob) ++ " " ++
+  show(map fst $ MyLib.dataOLS df_ob)
 
 --system $ "start " ++ "\"venv/Scripts/activate.bat\""
 --test2 = system $ "pythonw tmp/fatorial.py" ++ " 5"

@@ -17,19 +17,50 @@ An implementation of the Stochastic Supply Curve
   * [X] R<sup>2</sup>.
 * [X] Organising files (app.Main, app.Utils, app.SSC): the damn thing is running with ```cabal repl```, ```:l repl.hs``` and by calling the ```main``` function explicitly (```cabal run``` not working);
 * [ ] Static plots on Haskell (no cheating with R or Python);
-  * [ ] ???;
-  * [ ] ???;
-  * [ ] ???;
-  * [ ] ???.
-* [ ] Live updates of plots (cheating with Python);
+* [-] Live updates of plots (cheating with Python);
   * [X] CSV live feed update (cheating with Python);
-  * [ ] Real time plots.
+  * [-] Real time plots. Kinda of... ```system $ "python pyfile.py```;
 * [ ] Definitely improving the types on the future...
 * [ ] Implement Stoikov (2018)!!!
 
 ## A note on Python
 Python has to be installed with the libraries in [requirementsPy.yaml](requirementsPy.yaml).
 
+## Stochastic Processes - GBM and Liquidity Costs + Market Impact 
+
+Classical Geometrical Brownian Motion:
+
+$$
+\begin{aligned}
+dS_{t} = \mu S_{t}dt + \sigma S_{t}dW_{t}
+\label{GBM}
+\end{aligned}
+$$
+
+The Stochastic Process for an asset price $S_{t}$ under Almgren-Chriss(1999):
+
+$$
+\begin{aligned}
+dS_{t} = \sigma dW_{t} + kv_{t}dt
+\end{aligned}
+$$
+
+
+Under this economy, the expectation of the cash balance at the end of the execution schedule, $\bb{E}[X_{T}]$, incorporates both permanent market impact and liquidity costs:
+
+\begin{align}
+\bb{E}[X_{T}] = \overset{MtM value}{\overbrace{X_{0}+q_{0}S_{0}}} - \overset{perm. m. i.}{\overbrace{\frac{k}{2}q_{0}^{2}}} - \overset{Liquidity Costs}{\overbrace{\int_{0}^{T}V_{t}L\left(\frac{v_{t}}{V_{t}}\right)dt}}.
+\label{eq:exampleEX}
+\end{align}
+
+The first term is the Mark-to-Market value of the portfolio at time $t=0$. The second term corresponds to costs coming from the permanent market impact and, surprisingly, is not dependent on $v_{t}$, thus, being unavoidable. 
+
+The third and final term, the Liquidity Cost, is the only one varying with the control $(v_{t})_{t \in [0,T]}$. The function $L\left(\frac{v_{t}}{V_{t}}\right)$ is assumed to be convex and it is minimal when is proportional do $V_{t}$. 
+
+## Extreme Example: Market Liquidity Risk - The Saw-Tooth Pattern
+The "Saw-Tooth Pattern": Lehalle (2012) and Guéant (2016):
+
+![SawTooth](img/SawTooth.png)
 ## SSC on Order Book Data
 
 The Limit Order Book (LOB from now on) is considered to be the ``ultimate microscopic level of description of financial markets´´ (Bouchaud et. ali, 2002).
@@ -41,7 +72,6 @@ Market conditions may be path-dependent and building a LOB through time relies h
 A LOB organizes prices and quantities for an order-driven market and, as one the main points in this work, when there is Market Liquidity Risk it may change and change deeply, rapidly and drastically. 
 
 ![LOB_MULT3](img/Example_LOB1_Chap4.jpeg)
-
 
 Let $(P_{i}, \sum^{k})$ be the k-th level of depth at price $P_{i}$ from the bid side of a LOB. Each level of depth on the bid side is provides liquidity for a given buying order of size $v_{B}$ and, on the converse, a $(-P_{j},\sum^{m})$ is a point providing liquidity for a selling order. 
 
@@ -142,6 +172,8 @@ The animated gif below shows the evolution of the Stochastic Supply Curve minute
 ![SSC_HFD_SSC_rise_log_midprice_MULT3_20170320](img/SSC_MULT3_20170320.gif)
 
 ## References
+
+Robert Almgren and Neil Chriss. Value under liquidation. Risk, 12(12):61–63, 1999.
 
 Hannes Ardal. A supply curve analysis for the Icelandic Housing Financing Fund bond market. PhD thesis, University of Iceland, 2013.
 

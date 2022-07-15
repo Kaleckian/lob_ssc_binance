@@ -41,11 +41,14 @@ main = do
     ob <- MyLib.getOrderBook 
     let df_ob = MyLib.buildOBData ob
     CallPy.argData df_ob
-    putStrLn "Press \'CTRL + C \' to stop."
 
+    putStrLn $ "lastUpdateId: " ++ show (MyLib._idUpdate df_ob)
+    putStrLn $ "R-Squared: " ++ show(MyLib.rSqr df_ob)
+    putStrLn $ "CJP: " ++ show (exp . snd $ MyLib.regOLS df_ob)
+    putStrLn "Press \'CTRL + C \' to stop."
   {-
-  putStrLn "lastUpdateId:"
-  print $ show (MyLib._idUpdate df_ob)
+  putStrLn "lastUpdateId:" ++ show (MyLib._idUpdate df_ob)
+
 
   putStrLn "Mid-price:"
   print $ MyLib.midP df_ob
@@ -59,7 +62,7 @@ main = do
   putStrLn "Bid-Ask Spread in ticks:"
   print $ (MyLib.pBid df_ob - MyLib.pAsk df_ob ) / 0.0001
 
-  putStrLn "R-Squared:"
+  putStrLn $ "R-Squared:" ++ MyLib.rSqr df_ob
   print $ MyLib.rSqr df_ob
 
   putStrLn "OLS Parameters"
