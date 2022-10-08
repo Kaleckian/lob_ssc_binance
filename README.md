@@ -51,7 +51,6 @@ dS_{t} = \sigma dW_{t} + kv_{t}dt
 \end{aligned}
 $$
 
-
 Under this economy, the expectation of the cash balance at the end of the execution schedule, $\mathbb{E}[X_{T}]$, incorporates both permanent market impact and liquidity costs:
 
 $$
@@ -59,7 +58,7 @@ $$
 \mathbb{E}[X_{T}] = \overset{MtM value}{\overbrace{X_{0}+q_{0}S_{0}}} - \overset{perm. m. i.}{\overbrace{\frac{k}{2}q_{0}^{2}}} - \overset{Liquidity Costs}{\overbrace{\int_{0}^{T}V_{t}L\left(\frac{v_{t}}{V_{t}}\right)dt}}.
 \end{aligned}
 $$
-\v
+
 The first term is the Mark-to-Market value of the portfolio at time $t=0$. The second term corresponds to costs coming from the permanent market impact and, surprisingly, is not dependent on $v_{t}$, thus, being unavoidable. 
 
 The third and final term, the Liquidity Cost, is the only one varying with the control $(v_{t})_{t \in [0,T]}$. The function $L\left(\frac{v_{t}}{V_{t}}\right)$ is assumed to be convex and it is minimal when is proportional do $V_{t}$. 
